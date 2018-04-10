@@ -1,0 +1,46 @@
+{
+  "variables": {
+    "region": "",
+    "vpc_id": "",
+    "subnet_id": "",
+    "destination_regions": "",
+    "mediawiki_version": ""
+  },
+  "builders": [
+    {
+      "name": "aws",
+      "type": "amazon-ebs",
+      "region": "{{user `region`}}",
+      "vpc_id": "{{user `vpc_id`}}",
+      "subnet_id": "{{user `subnet_id`}}",
+      "associate_public_ip_address": true,
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "name": "ubuntu-*",
+          "root-device-type": "ebs"
+        },
+        "owners": [
+          "238573916854"
+        ],
+        "most_recent": true
+      },
+      "spot_price": "auto",
+      "spot_price_auto_product": "Linux/UNIX (Amazon VPC)",
+      "instance_type": "t2.micro",
+      "ami_regions": "{{user `destination_regions`}}",
+      "ssh_username": "ubuntu",
+      "ami_name": "mediawiki-{{user `mediawiki_version`}}-{{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "shell/mediawiki.sh",
+      "environment_vars": [
+        "MEDIAWIKI_VERSION={{user `mediawiki_version`}}"
+      ]
+    }
+  ]
+}
+

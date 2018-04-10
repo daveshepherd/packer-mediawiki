@@ -5,4 +5,4 @@ PACKER=$(which packer)
 
 MEDIAWIKI_VERSION=1.30.0
 
-${PACKER} build -var "london_vpc_id=${LONDON_VPC}" -var "london_subnet_id=${LONDON_SUBNET}" -var "ireland_vpc_id=${IRELAND_VPC}" -var "ireland_subnet_id=${IRELAND_SUBNET}" -var "mediawiki_version=${MEDIAWIKI_VERSION}" mediawiki.json
+${PACKER} build -var "region=${REGION}" -var "vpc_id=${VPC_ID}" -var "subnet_id=${SUBNET_ID}" -var "mediawiki_version=${MEDIAWIKI_VERSION}" -var "destination_regions=${DESTINATION_REGIONS}" build.json
