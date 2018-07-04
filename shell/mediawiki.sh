@@ -2,7 +2,7 @@
 
 set -e
 
-until sudo apt-get -y install apache2 php php-mysql libapache2-mod-php php-xml php-mbstring php-apcu php-intl imagemagick
+until sudo apt-get -y install apache2 php php-mysql libapache2-mod-php php-xml php-mbstring php-apcu php-intl imagemagick nfs-common
 do
   echo "Try again"
   sleep 5
