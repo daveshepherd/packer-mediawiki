@@ -117,3 +117,17 @@ The AWS access key id and secret access key should have the following permission
     ]
 }
 ```
+
+# Replication monitoring
+
+pt-heartbeat is installed and can be used to monitor replica lag in the mysql database.
+
+```
+pt-heartbeat --update --host mediawiki-db.alpha.endor.uk --database heartbeat --user username --password password --create-table --daemonize
+```
+
+GRANT ALL PRIVILEGES ON heartbeat.* TO 'pt-heartbeat'@'%' IDENTIFIED BY 'password';
+GRANT REPLICATION CLIENT ON *.* to 'pt-heartbeat'@'%';
+
+GRANT SELECT ON heartbeat.heartbeat TO 'wikiuser'@'%';
+GRANT REPLICATION CLIENT ON *.* to 'wikiuser'@'%';
