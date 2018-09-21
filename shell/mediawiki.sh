@@ -5,7 +5,7 @@ set -e
 attempt=0
 
 while true; do
-  sudo apt -y install apache2 php php-mysql libapache2-mod-php php-xml php-mbstring php-apcu php-intl imagemagick nfs-common percona-toolkit composer php7.2-curl zip && break
+  sudo apt -y install apache2 php php-mysql libapache2-mod-php php-xml php-mbstring php-apcu php-intl imagemagick nfs-common percona-toolkit composer php-curl zip && break
   if [ $attempt -ge 5 ]; then
     echo "Failed to install packages after several attempts, giving up..."
     exit 1;
